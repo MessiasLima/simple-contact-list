@@ -32,6 +32,18 @@ gulp.task("js", () => {
 		.pipe(gulp.dest(params.app.dist));
 });
 
+gulp.task("js-vendor", () => {
+	gulp.src(params.vendor.js)
+		.pipe(concat("vendor.min.js"))
+		.pipe(gulp.dest(params.app.dist));
+});
+
+gulp.task("css-vendor", () => {
+	gulp.src(params.vendor.css)
+		.pipe(concat("vendor.min.css"))
+		.pipe(gulp.dest(params.app.dist));
+});
+
 gulp.task("css", () => {
 	gulp.src(params.app.css)
 		.pipe(cleanCSS())
@@ -63,4 +75,4 @@ gulp.task("watch", () => {
 	gulp.watch(params.app.js, ["js", "reload"]);
 });
 
-gulp.task("default", ["html", "css", "js", "browserSync", "watch"]);
+gulp.task("default", ["js-vendor", "css-vendor", "html", "css", "js", "browserSync", "watch"]);
