@@ -1,53 +1,66 @@
-var gulp = require('gulp');
-var browserSync = require('browser-sync');
-var uglify = require('gulp-uglify');
-var concat = require('gulp-concat');
-var cleanCSS = require('gulp-clean-css');
-var babel = require('gulp-babel');
+var gulp = require("gulp");
+var browserSync = require("browser-sync");
+var uglify = require("gulp-uglify");
+var concat = require("gulp-concat");
+var cleanCSS = require("gulp-clean-css");
+var babel = require("gulp-babel");
 
-var jsFolders = ['src/*/*.js', 'src/*.js'];
-var cssFolders = ['src/*.css'];
-var htmlFolders = ['src/*.html'];
 
-gulp.task('js', () => {
-	gulp.src(jsFolders)
+var params = {
+	vendor: {
+		css: ["node_modules/material-components-web/dist/material-components-web.min.css"],
+		js: ["node_modules/material-components-web/dist/material-components-web.min.js"]
+	},
+	app: {
+		dist: "dist",
+		css: ["src/*.css"],
+		js: [
+			"src/*/*.js",
+			"src/*.js"
+		],
+		html: ["src/*.html"]
+	}
+}
+
+gulp.task("js", () => {
+	gulp.src(params.app.js)
 		.pipe(babel({
-			presets: ['env']
+			presets: ["env"]
 		}))
 		.pipe(uglify())
-		.pipe(concat('bundle.min.js'))
-		.pipe(gulp.dest('dist/js'));
+		.pipe(concat("bundle.min.js"))
+		.pipe(gulp.dest(params.app.dist));
 });
 
-gulp.task('css', () => {
-	gulp.src(cssFolders)
+gulp.task("css", () => {
+	gulp.src(params.app.css)
 		.pipe(cleanCSS())
-		.pipe(concat('bundle.min.css'))
-		.pipe(gulp.dest('dist/css'));
+		.pipe(concat("bundle.min.css"))
+		.pipe(gulp.dest(params.app.dist));
 });
 
-gulp.task('html', () => {
-	gulp.src(htmlFolders)
-		.pipe(gulp.dest('dist'));
+gulp.task("html", () => {
+	gulp.src(params.app.html)
+		.pipe(gulp.dest(params.app.dist));
 });
 
-gulp.task('browserSync', () => {
+gulp.task("browserSync", () => {
 	browserSync({
 		server: {
-			baseDir: "./dist/"
+			baseDir: params.app.dist
 		},
 		notify: false
 	});
 });
 
-gulp.task('reload', () => {
+gulp.task("reload", () => {
 	browserSync.reload();
 });
 
-gulp.task('watch', () => {
-	gulp.watch(htmlFolders, ['html', 'reload']);
-	gulp.watch(cssFolders, ['css', 'reload']);
-	gulp.watch(jsFolders, ['js', 'reload']);
+gulp.task("watch", () => {
+	gulp.watch(params.app.html, ["html", "reload"]);
+	gulp.watch(params.app.css, ["css", "reload"]);
+	gulp.watch(params.app.js, ["js", "reload"]);
 });
 
-gulp.task('default', ['html', 'js', 'css', 'browserSync', 'watch']);
+gulp.task("default", ["html", "css", "js", "browserSync", "watch"]);
