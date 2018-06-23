@@ -11,22 +11,66 @@
 	<link rel="stylesheet" href="bundle.min.css" />
 </head>
 
-<body>
+<body class="mdc-typography">
 
-	<header class="mdc-top-app-bar">
-		<div class="mdc-top-app-bar__row">
-			<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-				<a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
-				<span class="mdc-top-app-bar__title">Phonebook</span>
-			</section>
-		</div>
-	</header>
+	<aside class="mdc-drawer mdc-drawer--permanent">
+		<nav class="mdc-drawer__drawer">
+			<header class="mdc-drawer__header">
+				<div class="mdc-drawer__header-content mdc-theme--on-primary mdc-theme--primary-bg">Header here</div>
+			</header>
+			<nav class="mdc-drawer__content mdc-list-group">
+				<div id="icon-with-text-demo" class="mdc-list">
+					<a class="mdc-list-item mdc-list-item--selected demo-drawer-list-item" data-mdc-tabindex-handled="true" tabindex="-1">
+						<i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>Inbox</a>
+					<a class="mdc-list-item demo-drawer-list-item" data-mdc-tabindex-handled="true" tabindex="-1">
+						<i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i>Star</a>
+					<a class="mdc-list-item demo-drawer-list-item" data-mdc-tabindex-handled="true" tabindex="-1">
+						<i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>Sent Mail</a>
+					<a class="mdc-list-item demo-drawer-list-item" data-mdc-tabindex-handled="true" tabindex="-1">
+						<i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>Drafts</a>
+				</div>
+				<hr class="mdc-list-divider">
+				<div class="mdc-list">
+					<a class="mdc-list-item demo-drawer-list-item" data-mdc-tabindex-handled="true" tabindex="-1">
+						<i class="material-icons mdc-list-item__graphic" aria-hidden="true">email</i>All Mail</a>
+					<a class="mdc-list-item demo-drawer-list-item" data-mdc-tabindex-handled="true" tabindex="-1">
+						<i class="material-icons mdc-list-item__graphic" aria-hidden="true">delete</i>Trash</a>
+					<a class="mdc-list-item demo-drawer-list-item" data-mdc-tabindex-handled="true" tabindex="-1">
+						<i class="material-icons mdc-list-item__graphic" aria-hidden="true">report</i>Spam</a>
+				</div>
+			</nav>
+		</nav>
+	</aside>
 
-	<button class="mdc-button">
-		Button
-	</button>
+	<div class="drawer-header-flex">
+		<header class="mdc-top-app-bar">
+			<div class="mdc-top-app-bar__row">
+				<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+					<span class="mdc-top-app-bar__title">Permanent Drawer</span>
+				</section>
+			</div>
+		</header>
+	</div>
+
+	<div class="mdc-top-app-bar--fixed-adjust">
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+			irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+			non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+			irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+			non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+			irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+			non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+			irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+			non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	</div>
 
 	<script src="vendor.min.js"></script>
 	<script src="bundle.min.js"></script>
 </body>
-
