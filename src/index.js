@@ -1,4 +1,1 @@
-'use strict';
-(function(){
-	console.log('it works');
-})();
+console.log(new ContactService().getContacts());
