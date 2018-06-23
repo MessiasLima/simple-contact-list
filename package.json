@@ -1,0 +1,21 @@
+{
+	"name": "simple-contact-list",
+	"version": "1.0.0",
+	"description": "A simple phonebook written in JS",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Messias Lima",
+	"license": "MIT",
+	"dependencies": {
+		"material-components-web": "^0.36.1"
+	},
+	"devDependencies": {
+		"browser-sync": "^2.24.4",
+		"gulp": "^3.9.1",
+		"gulp-clean-css": "^3.9.4",
+		"gulp-concat": "^2.6.1",
+		"gulp-uglify": "^3.0.0"
+	}
+}
