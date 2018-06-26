@@ -16,7 +16,7 @@ function showDetails(contact) {
 	let selectedContact = contactService.getContactById(contact);
 	let htmlContent = `<div class="mdc-typography--headline5">${selectedContact.name}</div>`;
 	htmlContent += '<ul class="mdc-list demo-list mdc-list--two-line mdc-list--avatar-list">'
-	selectedContact.phones.forEach(phone=>{
+	selectedContact.phones.forEach(phone => {
 		htmlContent += `<div class="mdc-list-item mdc-ripple-upgraded" style="--mdc-ripple-fg-size:360px; --mdc-ripple-fg-scale:1.7064; --mdc-ripple-fg-translate-start:60px, -148.188px; --mdc-ripple-fg-translate-end:120px, -144px;">
 							<span class="mdc-list-item__graphic material-icons" aria-hidden="true">phone</span>
 							<span class="mdc-list-item__text">${phone.description}
@@ -25,21 +25,29 @@ function showDetails(contact) {
 						</div>`;
 	});
 	htmlContent += "</ul>"
-	htmlContent += `<button id="add-phone-button" class="demo-button mdc-button mdc-button--raised mdc-ripple-upgraded">
+	htmlContent += `<button onclick="initDialogPhone()" id="add-phone-button" class="demo-button mdc-button mdc-button--raised mdc-ripple-upgraded">
 						<i class="material-icons mdc-button__icon">add</i>New phone
 					</button>`;
 	let contactData = document.querySelector("#contact-data");
-	contactData.innerHTML=htmlContent;
+	contactData.innerHTML = htmlContent;
 }
 
-function initDialog() {
+function initDialogContact() {
 	new mdc.textField.MDCTextField(document.querySelector('#name-input'));
-	var dialog = new mdc.dialog.MDCDialog(document.querySelector('#dialog'));
+	var dialog = new mdc.dialog.MDCDialog(document.querySelector('#dialog-contact'));
 	document.querySelector("#add-button").addEventListener("click", () => {
 		dialog.show();
 	});
 
 	dialog.listen("MDCDialog:accept", saveContact.bind(window));
+}
+
+function initDialogPhone() {
+	new mdc.textField.MDCTextField(document.querySelector('#phone-input'));
+	new mdc.textField.MDCTextField(document.querySelector('#description-input'));
+	var phoneDialog = new mdc.dialog.MDCDialog(document.querySelector('#dialog-phone'));
+	phoneDialog.show();
+	phoneDialog.listen("MDCDialog:accept", saveContact.bind(window));
 }
 
 function saveContact() {
@@ -48,10 +56,11 @@ function saveContact() {
 		name: document.querySelector("#name-input-item").value
 	});
 	updateContactList();
+	document.querySelector("#name-input-item").value = "";
 }
 
 function init() {
 	contactService = new ContactService();
 	updateContactList(contacts);
-	initDialog();
+	initDialogContact();
 }
