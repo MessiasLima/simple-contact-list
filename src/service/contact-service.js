@@ -1,5 +1,5 @@
 class ContactService{
-	getContacts(){
-		console.log("test");
+	getContactById(idContact){
+		return contacts.find(c=> c.id == idContact);
 	}
 }
