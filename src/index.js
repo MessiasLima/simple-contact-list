@@ -71,6 +71,8 @@ function initDialogPhone(contactId) {
 			description: textFieldDescription.value,
 			number: textFieldPhone.value
 		});
+		textFieldDescription.value = "";
+		textFieldPhone.value = "";
 		showDetails(contactId);
 	});
 }
