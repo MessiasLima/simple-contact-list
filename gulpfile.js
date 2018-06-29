@@ -13,14 +13,21 @@ var params = {
 	},
 	app: {
 		dist: "dist",
+		distAssets: "dist/assets",
 		css: ["src/*.css"],
 		js: [
 			"src/*/*.js",
 			"src/*.js"
 		],
-		html: ["src/*.html"]
+		html: ["src/*.html"],
+		assets: ["src/assets/*"]
 	}
 }
+
+gulp.task("assets", () => {
+	gulp.src(params.app.assets)
+		.pipe(gulp.dest(params.app.distAssets));
+});
 
 gulp.task("js", () => {
 	gulp.src(params.app.js)
@@ -73,6 +80,7 @@ gulp.task("watch", () => {
 	gulp.watch(params.app.html, ["html", "reload"]);
 	gulp.watch(params.app.css, ["css", "reload"]);
 	gulp.watch(params.app.js, ["js", "reload"]);
+	gulp.watch(params.app.assets, ["assets", "reload"]);
 });
 
-gulp.task("default", ["js-vendor", "css-vendor", "html", "css", "js", "browserSync", "watch"]);
+gulp.task("default", ["js-vendor", "css-vendor", "html", "assets", "css", "js", "browserSync", "watch"]);

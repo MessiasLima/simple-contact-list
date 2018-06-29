@@ -38,7 +38,6 @@ function initDialogContact() {
 	document.querySelector("#add-button").addEventListener("click", () => {
 		dialog.show();
 	});
-
 	dialog.listen("MDCDialog:accept", saveContact.bind(window));
 }
 
