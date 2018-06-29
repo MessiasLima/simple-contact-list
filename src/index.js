@@ -14,8 +14,28 @@ function updateContactList(contacts) {
 
 function showDetails(contact) {
 	let selectedContact = contactService.getContactById(contact);
+	let contactData = document.querySelector("#contact-data");
 	let htmlContent = `<div class="mdc-typography--headline5">${selectedContact.name}</div>`;
-	htmlContent += '<ul class="mdc-list demo-list mdc-list--two-line mdc-list--avatar-list">'
+	if (selectedContact.phones && selectedContact.phones.length > 0) {
+		htmlContent += makePhoneList(selectedContact);
+	} else {
+		htmlContent += getNoPhoneMessage();
+	}
+	htmlContent += `<button onclick="initDialogPhone(${selectedContact.id})" id="add-phone-button" class="demo-button mdc-button mdc-button--raised mdc-ripple-upgraded">
+						<i class="material-icons mdc-button__icon">add</i>New phone
+					</button>`;
+	contactData.innerHTML = htmlContent;
+}
+
+function getNoPhoneMessage(){
+	return `<div class="welcome-content">
+				<img src="assets/contact.png" alt="logo">
+				<p class="mdc-typography--headline5">No phones yet. Please add a new one</p>
+			</div>`;
+}
+
+function makePhoneList(selectedContact) {
+	let htmlContent = '<ul class="mdc-list demo-list mdc-list--two-line mdc-list--avatar-list">';
 	selectedContact.phones.forEach(phone => {
 		htmlContent += `<div class="mdc-list-item mdc-ripple-upgraded" style="--mdc-ripple-fg-size:360px; --mdc-ripple-fg-scale:1.7064; --mdc-ripple-fg-translate-start:60px, -148.188px; --mdc-ripple-fg-translate-end:120px, -144px;">
 							<span class="mdc-list-item__graphic material-icons" aria-hidden="true">phone</span>
@@ -24,12 +44,8 @@ function showDetails(contact) {
 							</span>
 						</div>`;
 	});
-	htmlContent += "</ul>"
-	htmlContent += `<button onclick="initDialogPhone(${selectedContact.id})" id="add-phone-button" class="demo-button mdc-button mdc-button--raised mdc-ripple-upgraded">
-						<i class="material-icons mdc-button__icon">add</i>New phone
-					</button>`;
-	let contactData = document.querySelector("#contact-data");
-	contactData.innerHTML = htmlContent;
+	htmlContent += "</ul>";
+	return htmlContent;
 }
 
 function initDialogContact() {
@@ -47,8 +63,8 @@ function initDialogPhone(contactId) {
 	var textFieldDescription = new mdc.textField.MDCTextField(document.querySelector('#description-input'));
 	var phoneDialog = new mdc.dialog.MDCDialog(document.querySelector('#dialog-phone'));
 	phoneDialog.show();
-	phoneDialog.listen("MDCDialog:accept", ()=>{
-		if(!selectedContact.phones){
+	phoneDialog.listen("MDCDialog:accept", () => {
+		if (!selectedContact.phones) {
 			selectedContact.phones = [];
 		}
 		selectedContact.phones.push({
