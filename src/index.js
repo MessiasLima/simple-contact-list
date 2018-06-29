@@ -25,7 +25,7 @@ function showDetails(contact) {
 						</div>`;
 	});
 	htmlContent += "</ul>"
-	htmlContent += `<button onclick="initDialogPhone()" id="add-phone-button" class="demo-button mdc-button mdc-button--raised mdc-ripple-upgraded">
+	htmlContent += `<button onclick="initDialogPhone(${selectedContact.id})" id="add-phone-button" class="demo-button mdc-button mdc-button--raised mdc-ripple-upgraded">
 						<i class="material-icons mdc-button__icon">add</i>New phone
 					</button>`;
 	let contactData = document.querySelector("#contact-data");
@@ -42,12 +42,22 @@ function initDialogContact() {
 	dialog.listen("MDCDialog:accept", saveContact.bind(window));
 }
 
-function initDialogPhone() {
-	new mdc.textField.MDCTextField(document.querySelector('#phone-input'));
-	new mdc.textField.MDCTextField(document.querySelector('#description-input'));
+function initDialogPhone(contactId) {
+	let selectedContact = contactService.getContactById(contactId);
+	var textFieldPhone = new mdc.textField.MDCTextField(document.querySelector('#phone-input'));
+	var textFieldDescription = new mdc.textField.MDCTextField(document.querySelector('#description-input'));
 	var phoneDialog = new mdc.dialog.MDCDialog(document.querySelector('#dialog-phone'));
 	phoneDialog.show();
-	phoneDialog.listen("MDCDialog:accept", saveContact.bind(window));
+	phoneDialog.listen("MDCDialog:accept", ()=>{
+		if(!selectedContact.phones){
+			selectedContact.phones = [];
+		}
+		selectedContact.phones.push({
+			description: textFieldDescription.value,
+			number: textFieldPhone.value
+		});
+		showDetails(contactId);
+	});
 }
 
 function saveContact() {
